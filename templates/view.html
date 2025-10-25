@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Record</title>
+    <style>
+        body { font-family: Arial; background-color: #f7f7f7; padding: 20px; }
+        table { margin: auto; border-collapse: collapse; width: 50%; background: white; box-shadow: 0 0 5px #aaa; }
+        th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
+        th { background-color: #007bff; color: white; }
+    </style>
+</head>
+<body>
+    <h2 style="text-align:center;">{{ table }} Record Details</h2>
+    <table>
+        {% for key, value in record.items() %}
+        <tr>
+            <th>{{ key }}</th>
+            <td>{{ value }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Electricity Billing Management System</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background-color: #f7f7f7; }
+        h1 { text-align: center; color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 40px; background: white; box-shadow: 0 0 5px #ccc; }
+        th, td { padding: 8px; text-align: center; border: 1px solid #ddd; }
+        th { background-color: #007bff; color: white; }
+        a { text-decoration: none; color: white; padding: 5px 10px; border-radius: 4px; }
+        .view { background-color: #28a745; }
+        .update { background-color: #ffc107; color: black; }
+        .delete { background-color: #dc3545; }
+    </style>
+</head>
+<body>
+    <h1>Electricity Billing Management System</h1>
+
+    {% for table_name, data in {'Customers': customers, 'Meters': meters, 'Readings': readings, 'Bills': bills}.items() %}
+    <h2>{{ table_name }}</h2>
+    {% if data %}
+    <table>
+        <tr>
+            {% for col in data[0].keys() %}
+            <th>{{ col }}</th>
+            {% endfor %}
+            <th>Actions</th>
+        </tr>
+        {% for row in data %}
+        <tr>
+            {% for col in row.values() %}
+            <td>{{ col }}</td>
+            {% endfor %}
+            <td>
+                <a href="/view/{{ table_name }}/{{ row[table_name[:-1].lower() + '_id'] }}" class="view">View</a>
+                <a href="/update/{{ table_name }}/{{ row[table_name[:-1].lower() + '_id'] }}" class="update">Update</a>
+                <a href="/delete/{{ table_name }}/{{ row[table_name[:-1].lower() + '_id'] }}" class="delete">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p>No records found in {{ table_name }}.</p>
+    {% endif %}
+    {% endfor %}
+</body>
+</html>
